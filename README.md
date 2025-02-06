@@ -27,3 +27,30 @@ public class Main {
 
     }
 }
+
+------------------------------------------------------------------------------------------------------------------------------------
+Códifo simples usando operadores (&) e condição (if/else)
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner (System.in);
+
+        int horas;
+        System.out.println("Que horas?");
+        horas = sc.nextInt();
+
+        if(horas>=5 && horas <12){
+            System.out.println("Bom dia");
+        }
+        if(horas>=12 && horas<18){
+            System.out.println("Boa tarde");
+        }
+        else{
+            System.out.println("Boa noite");}
+
+        sc.close();
+
+    }
+}
+----------------------------------------------------------------------------------------------------------------------------------

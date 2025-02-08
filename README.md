@@ -212,3 +212,33 @@ public class Main {
 
     }
 }
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Fazer um código utilizando o laço de repetição FOR para ser executado por n vezes e mostrar no final a soma de todos o n° digitados; 
+
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner (System.in);
+
+        System.out.print("Digite quantas vezes será executado o laço for: ");
+        int n = sc.nextInt();
+
+        int i, soma = 0;
+
+        for(i=0;i<n;i++){
+            System.out.print("Digite o " + i + "° número:");
+            int x = sc.nextInt();
+
+            soma = soma+x;
+        }
+         System.out.print("O laço foi repetido " + n + " vezes e a soma de todos os n° digitados é " + soma);
+
+    sc.close();
+
+    }
+}
+
+
+----------------------------------------------------------------------------------------------------------------

@@ -242,3 +242,68 @@ public class Main {
 
 
 ----------------------------------------------------------------------------------------------------------------
+fACA UM PROGRMA QUE CONTROLE O ESTOQUE. PEÇA O NOME DO PRODUTO, VALOR E QUANTIDADE EXISTANTE. DEPOIS PEÇA A QUANTIDADE QUE PRECISA ADD E DEPOIS A QUANTIDADE QUE PRECISA REMOVER
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    Produtc produtc = new Produtc();
+
+    System.out.println("Enter product data");
+    System.out.print("Name: ");
+    produtc.name = sc.nextLine();
+
+    System.out.print("Price: ");
+    produtc.price = sc.nextInt();
+
+    System.out.print("Quantity in stock: ");
+    produtc.quantity = sc.nextInt();
+
+    System.out.println(produtc);
+    System.out.print("How many quantity do you want add at stock?");
+    int quantity = sc.nextInt();
+    produtc.addProducts(quantity);
+
+    System.out.println("Uptade date: " + quantity+ " quantity was add at stock");
+    System.out.println(produtc);
+
+    System.out.print("How many quantity do you want remove of stock?");
+    quantity = sc.nextInt();
+    produtc.removeProduct(quantity);
+
+    System.out.println("Uptade date: " + quantity+ " quantity was remove at stock");
+    System.out.println(produtc);
+
+    sc.close();
+    }
+
+}
+
+public class Produtc{
+    public String name;
+    public double price;
+    public int quantity;
+
+    public double totalValueInStock(){
+        return price*quantity;
+    }
+
+    public void addProducts(int quantity){
+        this.quantity += quantity;
+    }
+
+    public void removeProduct(int quantity){
+        this.quantity -= quantity;
+    }
+
+    public String toString(){
+        return name + ", R$" + price + ", " + quantity + " units, total R$" + totalValueInStock();
+    }
+
+}
+

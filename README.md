@@ -307,3 +307,87 @@ public class Produtc{
 
 }
 
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Fazer um programa que receba o valor do raio, calcula volume e circunferencia. 
+
+public class Produtc{
+    public double radious;
+
+    public double valueCircunferencia(){
+        return 2 * 3.1415 * radious;
+    }
+
+    public double valueVolume(){
+        return 3.1415 * radious * radious;
+    }
+
+    public String toString(){
+        return "Value of circunferencia " + valueCircunferencia() + "Value of volume" + valueVolume();
+    }
+
+}
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    Produtc produtc = new Produtc();
+
+    System.out.println("How is the radiuos?");
+    produtc.radious = sc.nextDouble();
+
+    System.out.print(produtc);
+
+    sc.close();
+    }
+
+}
+-----------------------------------------------------------------------------------------------------------------
+
+fazer um programa que receba o valor do dolar e a quantidade que quer comprar, aplicar um taxa e retornar o valor final para o usuario
+
+public class Converter{
+    public double valueDolar;
+    public double dolarBought;
+
+    public double converter(){
+        double totalValue = valueDolar * dolarBought;
+        double iof = totalValue * 0.06; // 6% de IOF
+        return totalValue + iof;
+    }
+
+    public String toString(){
+        return "You need to pay in reais: " + String.format("%.2f", converter());
+    }
+
+}
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    Converter converter = new Converter();
+
+    System.out.println("How is the value of dolar?");
+    converter.valueDolar = sc.nextDouble();
+
+    System.out.println("How many dolar do you want bought?");
+    converter.dolarBought = sc.nextDouble();
+
+    System.out.print(converter);
+
+    sc.close();
+    }
+
+}
+

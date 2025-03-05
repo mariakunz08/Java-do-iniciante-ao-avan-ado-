@@ -391,3 +391,201 @@ public class Main {
 
 }
 
+----------------------------------------------------------------------------------------------------------------------------------
+
+Faça um programa que leia um número inteiro positivo N (máximo = 10) e depois N números inteiros 
+e armazene-os em um vetor. Em seguida, mostrar na tela todos os números negativos lidos. 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos numeros voce vai digitar?  ");
+    int n = sc.nextInt();
+
+    int [] vect = new int[n];
+
+    for (int i=0; i<vect.length; i++) {
+        System.out.print("Digite um numero: ");
+        vect [i] = sc.nextInt();
+    }
+
+    System.out.println();
+    System.out.println("Numeros negativos:");
+    for(int i=0; i<vect.length; i++) {
+        if(vect[i] < 0) {
+
+            System.out.println(vect[i]);
+        }
+    }
+
+    sc.close();
+    }
+
+}
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Faça um programa que leia N números reais e armazene-os em um vetor. Em seguida: 
+- Imprimir todos os elementos do vetor
+- - Mostrar na tela a soma e a média dos elementos d
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos numeros voce vai digitar? ");
+    int n = sc.nextInt();
+
+    int [] vect = new int[n];
+
+    for (int i=0; i<vect.length; i++) {
+        System.out.print("Digite um numero: ");
+        vect [i] = sc.nextInt();
+    }
+
+    System.out.println();
+    int soma = 0, media = 0;
+    System.out.println("Valores:");
+    for(int i=0; i<vect.length; i++) {
+        System.out.println(vect[i]);
+        soma = soma + vect[i];
+    }
+    media = soma/n;
+    System.out.println("Soma: " + soma);
+    System.out.println("Média: " + media);
+
+    sc.close();
+    }
+
+}
+--------------------------------------------------------------------------------------------------------------------------------
+
+Fazer um programa para ler nome, idade e altura de N pessoas, conforme exemplo. Depois, mostrar na 
+tela a altura média das pessoas, e mostrar também a porcentagem de pessoas com menos de 16 anos, 
+bem como os nomes dessas pessoas caso houver. 
+
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos pessoas serão digitadas? ");
+    int n = sc.nextInt();
+
+    Product[] vect = new Product[n];
+
+    for (int i=0; i<vect.length; i++) {
+
+        System.out.println("Dados da " + (i + 1) + "a pessoa");
+        sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Idade: ");
+        int idade = sc.nextInt();
+
+        System.out.print("Altura: ");
+        double altura = sc.nextDouble();
+
+        vect [i] = new Product(nome, idade, altura);
+    }
+
+    System.out.println();
+
+    double soma = 0, media = 0;
+
+
+
+    for(int i=0; i<vect.length; i++) {
+        soma = soma + vect[i].getAltura();
+
+    }
+    media = soma/n;
+
+
+    int contador = 0;
+
+    System.out.println("Altura média: " + media);
+
+    for(int i=0; i<vect.length; i++) {
+
+        if (vect[i].getIdade() < 16) {
+            contador ++;
+        }
+    }
+
+    double porcentagem = (contador / n) * 100;
+
+    System.out.println("Porcentagem menor de 16 anos: " + porcentagem);
+
+        
+    for(int i=0; i<vect.length; i++) {
+
+        if (vect[i].getIdade() < 16) {
+           System.out.println("Menores de 16 anos: " + vect[i].getName());
+        }
+    }
+    sc.close();
+    }
+
+}
+
+
+public class Product {
+
+    public String name;
+    public int idade;
+    public double altura;
+
+
+    public Product (String name, int idade, double altura){
+        this.name = name;
+        this.idade = idade;
+        this.altura = altura;
+
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public double media (double altura){
+        return altura;
+    }
+
+
+
+}

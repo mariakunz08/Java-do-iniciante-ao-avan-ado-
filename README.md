@@ -589,3 +589,46 @@ public class Product {
 
 
 }
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Faça um programa que leia N números inteiros e armazene-os em um vetor. Em seguida, mostre na 
+tela todos os números pares, e também a quantidade de números pares. 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos números serão digitadas? ");
+    int n = sc.nextInt();
+
+    int contador = 0;
+
+    int [] vect = new int[n];
+
+    for (int i=0; i<vect.length; i++) {
+
+        System.out.print("Digite o " + (i +1) +  "° número: ");
+        vect[i] = sc.nextInt();
+    }
+    System.out.println("Números pares: ");
+    for (int i=0; i<vect.length; i++) {
+        if (vect[i] % 2 == 0){
+            contador ++;
+            System.out.println(vect[i]);
+        }
+
+    }
+
+    System.out.println("Qauntidade de numeros pares: " + contador);
+
+
+    sc.close();
+    }
+
+}
+

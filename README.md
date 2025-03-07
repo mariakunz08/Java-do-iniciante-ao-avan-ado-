@@ -632,3 +632,179 @@ import java.util.Scanner;
 
 }
 
+--------------------------------------------------------------------------------------------------------------------------------
+
+Faça um programa que leia N números reais e armazene-os em um vetor. Em seguida, mostrar na tela 
+o maior número do vetor (supor não haver empates). Mostrar também a posição do maior elemento, 
+considerando a primeira posição como 0 (zero). 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos números serão digitadas? ");
+    int n = sc.nextInt();
+
+    int contador = 0;
+
+    int [] vect = new int[n];
+
+    for (int i=0; i<vect.length; i++) {
+
+        System.out.print("Digite o " + (i +1) +  "° número: ");
+        vect[i] = sc.nextInt();
+    }
+
+        double maior = vect[0];
+        int posmaior = 0;
+
+        for (int i=1; i<n; i++) {
+            if (vect[i] > maior) {
+                maior = vect[i];
+                posmaior = i;
+            }
+        }
+
+        System.out.printf("MAIOR VALOR = %.1f\n", maior);
+        System.out.printf("POSICAO DO MAIOR VALOR = %d\n", posmaior);
+    sc.close();
+    }
+
+}
+----------------------------------------------------------------------------------------------------------------------------------
+
+Faça um programa para ler dois vetores A e B, contendo N elementos cada. Em seguida, gere um 
+terceiro vetor C onde cada elemento de C é a soma dos elementos correspondentes de A e B. Imprima 
+o vetor C gerado. 
+
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos valores vai ter cada vetor? ");
+    int n = sc.nextInt();
+
+    int [] vecta = new int[n];
+    int [] vectb = new int[n];
+    int [] vectc = new int[n];
+
+    for (int i=0; i<vecta.length; i++) {
+
+        System.out.print("Digite os valores do vetor a: ");
+        vecta[i] = sc.nextInt();
+    }
+
+    for (int i=0; i<vectb.length; i++) {
+
+        System.out.print("Digite os valores do vetor b: ");
+        vectb[i] = sc.nextInt();
+
+    }
+
+    for (int i=0; i<vectc.length; i++) {
+        vectc[i] = vecta[i]+vectb[i];
+        System.out.printf(" " + vectc[i]);
+    }
+    sc.close();
+    }
+
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Fazer um programa para ler um número inteiro N e depois um vetor de N números reais. Em seguida, 
+mostrar na tela a média aritmética de todos elementos com três casas decimais. Depois mostrar todos 
+os elementos do vetor que estejam abaixo da média, com uma casa decimal cada. 
+
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos valores o vetor vai ter? ");
+    int n = sc.nextInt();
+
+    int [] vecta = new int[n];
+
+
+double media=0, soma = 0;
+    for (int i=0; i<vecta.length; i++) {
+
+        System.out.print("Digite o " + (i+1) + "° valor: ");
+        vecta[i] = sc.nextInt();
+        soma = soma + vecta[i];
+    }
+
+    media = soma/n;
+
+    System.out.println("Media do vetor: " + media);
+    System.out.print("Elementos abaixo da media:");
+
+    for(int i=0; i<vecta.length; i++) {
+        if (vecta[i] < media) {
+            System.out.print(" " + vecta[i]);
+        }
+    }
+
+    sc.close();
+    }
+
+}
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Fazer um programa para ler um vetor de N números inteiros. Em seguida, mostrar na tela a média 
+aritmética somente dos números pares lidos, com uma casa decimal. Se nenhum número par for 
+digitado, mostrar a mensagem "NENHUM NUMERO PAR" 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantos valores o vetor vai ter? ");
+    int n = sc.nextInt();
+
+    int [] vecta = new int[n];
+
+
+double media=0, soma = 0;
+    for (int i=0; i<vecta.length; i++) {
+        System.out.print("Digite o " + (i+1) + "° valor: ");
+        vecta[i] = sc.nextInt();
+        if(vecta[i] % 2 == 0){
+            soma = soma + vecta[i];
+        }
+    }
+
+    media = soma/n;
+
+    if(soma > 0){
+        System.out.println("Media dos numeros pares digitados: " + media);
+    }
+
+    else{
+        System.out.println("Nenhum numero par");
+    }
+
+    sc.close();
+    }
+
+}
+

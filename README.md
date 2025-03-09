@@ -808,3 +808,171 @@ double media=0, soma = 0;
 
 }
 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Fazer um programa para ler um conjunto de nomes de pessoas e suas respectivas idades. Os nomes 
+devem ser armazenados em um vetor, e as idades em um outro vetor. Depois, mostrar na tela o nome 
+da pessoa mais velha. 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantas pessoas você vai digitar? ");
+    int n = sc.nextInt();
+
+    int [] idade = new int[n];
+    String [] nomes = new String[n];
+    
+    for (int i=0; i<n; i++) {
+        System.out.println("Dados da " + (i+1) + "° pessoa: ");
+        sc.nextLine();
+        System.out.print("Entre com o nome ");
+        nomes[i] = sc.nextLine();
+        System.out.print("Idade ");
+        idade[i] = sc.nextInt();
+
+        }
+    int maiorIdade = idade[0];
+    int posicaoMaior = 0;
+
+    for (int i=1; i<n; i++) {
+        if(idade[i] > maiorIdade){
+            maiorIdade = idade[i];
+            posicaoMaior = i;
+        }
+    }
+    System.out.print("Nome da pessoa com a maior idade: " + nomes[posicaoMaior]);
+    sc.close();
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Fazer um programa para ler um conjunto de N nomes de alunos, bem como as notas que eles tiraram 
+no 1º e 2º semestres. Cada uma dessas informações deve ser armazenada em um vetor. Depois, imprimir 
+os nomes dos alunos aprovados, considerando aprovados aqueles cuja média das notas seja maior ou 
+igual a 6.0 (seis).
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantas pessoas você vai digitar? ");
+    int n = sc.nextInt();
+
+
+    String [] nomes = new String[n];
+    int [] nota1 = new int[n];
+    int [] nota2 = new int[n];
+
+    for (int i=0; i<n; i++) {
+        System.out.println("Dados da " + (i+1) + "° aluno: ");
+        sc.nextLine();
+        System.out.print("Entre com o nome ");
+        nomes[i] = sc.nextLine();
+        System.out.print("nota 1 ");
+        nota1[i] = sc.nextInt();
+        System.out.print("nota 1 ");
+        nota2[i] = sc.nextInt();
+
+        }
+    double media = 0;
+    String aprovado = nomes[0];
+    int posicao = 0;
+
+    for (int i=1; i<n; i++) {
+        media = nota1[i] + nota2[i];
+        if(media > 6){
+            aprovado = nomes[i];
+            posicao = i;
+        }
+    }
+    System.out.print("Aprovados: " + nomes[posicao]);
+    sc.close();
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+Tem-se um conjunto de dados contendo a altura e o gênero (M, F) de N pessoas. Fazer um programa 
+que calcule e escreva a maior e a menor altura do grupo, a média de altura das mulheres, e o número 
+de homens. 
+
+import java.util.Scanner;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Quantas pessoas você vai digitar? ");
+    int n = sc.nextInt();
+
+
+    char [] genero = new char[n];
+    double  [] altura = new double[n];
+
+
+    for (int i=0; i<n; i++) {
+        System.out.println("Dados da " + (i+1) + "° pessoa: ");
+        sc.nextLine();
+        System.out.print("Entre com o genero (f/m) ");
+        genero[i] = sc.next().charAt(0);
+        System.out.print("Entre com a altura ");
+        altura[i] = sc.nextDouble();
+        }
+
+
+    double maiorAltura = altura[0], menorAltura = altura[0], mediaAltura = 0, soma = 0;
+    int contadorF = 0, contadorM = 0;
+
+    for (int i=1; i<n; i++) {
+        if(altura[i] > maiorAltura){
+            maiorAltura = altura[i];
+        }
+    }
+
+    for (int i=1; i<n; i++) {
+        if(altura[i] < menorAltura){
+            menorAltura = altura[i];
+        }
+    }
+
+    for (int i=0; i<n; i++) {
+        if(genero[i] == 'f'){
+            contadorF++;
+            soma = soma + altura[i];
+        }
+    }
+    for (int i=0; i<n; i++) {
+        if(genero[i] == 'm'){
+            contadorM++;
+        }
+    }
+
+    mediaAltura = soma/contadorF;
+
+    System.out.println("Maior altura: " + maiorAltura);
+    System.out.println("Menor altura: " + menorAltura);
+    System.out.printf("Media altura feminina: %.2f\n", mediaAltura);
+    System.out.println("Quantidade de homens: " + contadorM);
+
+    sc.close();
+    }
+}
+
+
+
+
+
+
+

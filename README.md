@@ -971,6 +971,186 @@ import java.util.Scanner;
 }
 
 
+------------------------------------------------------------------------------------------------------------------------
+
+No código abaixo contém várias operações com LIsta, por exemplo: como adicionar, como adicionar passandou o local, como remover, remover pelo nome, usando uma função lampda para idexar apenas quem começa com x letra ou removendo quem começa com n letra, encontrando posição.......
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+    public class Main {
+
+    public static void main(String [] args){
+
+    Scanner sc = new Scanner(System.in);
+
+    List<String> list = new ArrayList<>();
+
+    list.add("Maria"); //adiciona Maria
+    list.add("Momo"); //adiciona Momo
+    list.add("Karina");//adiciona Karina
+    list.add("Soph"); //adiciona Soph
+    list.add("Suzy"); //adiciona Suzy
+    list.add(1, "Paulo");//adiciona Paulo
+    list.remove("Suzy"); //remove suzy
+    list.remove(4); // remove karina
+    list.add("Marilusa");// adiciona Marilusa
+
+
+    for (String x : list){
+        System.out.println(x);
+    }
+
+    System.out.println("O tamanho da lista é: " + list.size());
+    System.out.println("-------------------------------");
+
+    list.removeIf(x -> x.charAt(0) == 'P');
+    for (String x : list){
+        System.out.println("Removendo quem começa com a letra P ");
+    }
+    for (String x : list){
+            System.out.println("Ficou na lista: " + x);
+    }
+    System.out.println("-------------------------------");
+    System.out.println("Encontrando Karina na posição: " + list.indexOf("Karina"));
+
+    List<String> result = list.stream().filter(x -> x.charAt(0) == 'M').collect(Collectors.toList());
+    for (String y : result){
+            System.out.println("Deixando só quem começa com M " + y);
+    }
+
+    System.out.println("-------------------------------");
+    String name = list.stream().filter(x -> x.charAt(0) == 'M').findFirst().orElse(null);
+    System.out.print(name);
+    sc.close();
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------
+
+criando matrizes 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite o numero: ");
+        int numero = sc.nextInt();
+
+        int [][] matrix = new int [numero][numero];
+
+        for (int i=0; i<numero; i++){
+            for(int j =0; j<numero; j++){
+                System.out.print("Entre com o valor da linha " + (i+1) + " e coluna " + (j+1) + ": ");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Dioagonal principal: ");
+        for (int i=0; i<numero; i++){
+            System.out.print(matrix[i][i] + " ");
+        }
+        int contador = 0;
+        for (int i=0; i<numero; i++){
+            for(int j =0; j<numero; j++){
+                if(matrix[i][j] < 0 ){
+                    contador++;
+                }
+            }
+        }
+
+        System.out.print("A quantida de numero negativos é: " + contador);
+
+
+
+        sc.close();
+
+
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+ Fazerumprogramaparalerdoisnúmeros inteirosMeN,edepois ler
+ umamatriz deMlinhas porNcolunas contendonúmeros inteiros,
+ podendohaver repetições. Emseguida, lerumnúmero inteiroXque
+ pertenceàmatriz. Para cadaocorrênciadeX,mostrar os valores à
+ esquerda, acima, àdireitaeabaixodeX, quandohouver, conforme
+ exemplo.
+
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite a qtd de linha: ");
+        int linha = sc.nextInt();
+
+        System.out.print("Digite a qtd de coluna: ");
+        int coluna = sc.nextInt();
+
+        int [][] matrix = new int [linha][coluna];
+
+        for (int i=0; i<linha; i++){
+            for(int j =0; j<coluna; j++){
+                System.out.print("Entre com o valor da linha " + (i+1) + " e coluna " + (j+1) + ": ");
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Entre com um numero : ");
+        int x = sc.nextInt();
+
+        for (int i=0; i<linha; i++){
+            for(int j =0; j<coluna; j++){
+                if(matrix[i][j] == x ){
+                    System.out.println("Posição " + i + "," + j + ":");
+                    if(j>0) {
+                        System.out.println("Esquerda: " + matrix[i][j - 1]);
+                    }
+                    if(i>0) {
+                        System.out.println("Em cima: " + matrix[i-1][j]);
+                    }
+                    if (j < matrix[i].length-1) {
+                        System.out.println("Direita: " + matrix[i][j+1]);
+                    }
+                    if (i < matrix.length-1) {
+                        System.out.println("A baixo: " + matrix[i+1][j]);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        sc.close();
+
+
+    }
+}
+
+
+
+
+
+
+
 
 
 

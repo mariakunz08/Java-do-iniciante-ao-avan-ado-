@@ -1146,6 +1146,583 @@ public class Main {
 }
 
 
+----------------------------------------------------------------------------------------------------------------------------------
+public class Departamento{
+
+    private String nome;
+
+    public Departamento(){
+
+    }
+
+    public Departamento(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}
+
+import java.util.Date;
+
+public class ContratoHora {
+
+    private Date data;
+    public Double valorPorHora;
+    private Integer hora;
+
+    public ContratoHora(){
+    }
+
+    public ContratoHora(Date data, Double valorPorHora, Integer hora) {
+        this.data = data;
+        this.valorPorHora = valorPorHora;
+        this.hora = hora;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Double getValorPorHora() {
+        return valorPorHora;
+    }
+
+    public void setValorPorHora(Double valorPorHora) {
+        this.valorPorHora = valorPorHora;
+    }
+
+    public Integer getHora() {
+        return hora;
+    }
+
+    public void setHora(Integer hora) {
+        this.hora = hora;
+    }
+    public double valorTotal(){
+        return valorPorHora*hora;
+    }
+}
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Main {
+    public static void main (String[] args) throws ParseException {
+        Scanner sc = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        System.out.print("Entre com o nome do departamento(junior/intermediario/senior): ");
+        String departamento = sc.nextLine();
+        System.out.println("Entre com os dados do trabalhador:");
+        sc.nextLine();
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+        System.out.print("Cargo: ");
+        String cargo = sc.nextLine();
+        System.out.print("Salario base: ");
+        double salarioBase = sc.nextInt();
+        sc.nextLine();
+
+        Trabalhador trabalhador = new Trabalhador(nome, Cargo.valueOf(cargo), salarioBase, new Departamento(departamento));
+
+        System.out.print("Quantos contratos esse trabalhador tem: ");
+        int numeroContratos = sc.nextInt();
+        sc.nextLine();
+
+        for(int i=0; i<numeroContratos;i++){
+            System.out.print("Entre com o contrato numero " + (i+1) + ": ");
+
+            System.out.print("Entre com a data (DD/MM/AAAA): ");
+            Date contratoData = sdf.parse(sc.next());
+
+            System.out.print("Valor por hora: ");
+            double valorPorHora = sc.nextDouble();
+
+            System.out.print("Duração(horas): ");
+            int hora = sc.nextInt();
+            sc.nextLine();
+
+            ContratoHora contratoHora = new ContratoHora(contratoData, valorPorHora, hora);
+            trabalhador.addContratos(contratoHora);
+        }
+
+        System.out.println();
+        sc.nextLine();
+        System.out.print("Entre com o mes e ano para calcular o quanto recebeu (mm/yyyy): ");
+        String mesAno = sc.nextLine();
+        int mes = Integer.parseInt(mesAno.substring(0,2));
+        int ano = Integer.parseInt(mesAno.substring(3));
+        System.out.print("NoME: " + trabalhador.getName());
+        System.out.print("Departamento: " + trabalhador.getDepartamento().getNome());
+        System.out.print("Recebido: " + mesAno + " " + String.format("%.2f", trabalhador.income(ano, mes)));
+        sc.close();
+
+    }
+}
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class Trabalhador {
+  private String nome;
+  private Cargo cargo;
+  private Double salarioBase;
+
+  private Departamento departamento;
+  private List<ContratoHora> contratos = new ArrayList<>();
+
+  public Trabalhador(){
+
+  }
+
+  public Trabalhador(String nome, Cargo cargo, Double salarioBase, Departamento departamento) {
+      this.nome = nome;
+      this.cargo = cargo;
+      this.salarioBase = salarioBase;
+      this.departamento = departamento;
+  }
+
+
+    public String getName() {
+        return nome;
+    }
+
+    public void setName(String nome) {
+        this.nome = nome;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Double getSalarioBase() {
+        return salarioBase;
+    }
+
+    public void setSalarioBase(Double salarioBase) {
+        this.salarioBase = salarioBase;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public List<ContratoHora> getContratos() {
+        return contratos;
+    }
+
+    public void  addContratos(ContratoHora contrato){
+        contratos.add(contrato);
+    }
+
+    public void removeContrato( ContratoHora contrato){
+        contratos.remove(contrato);
+    }
+
+    public double income(int ano, int mes){
+      double soma = salarioBase;
+      Calendar cal = Calendar.getInstance();
+      for(ContratoHora c : contratos){
+          cal.setTime(c.getData());
+          int c_ano = cal.get(Calendar.YEAR);
+          int c_mes = cal.get(Calendar.MONTH);
+          if(c_ano == ano && c_mes == mes){
+              soma += c.valorTotal();
+          }
+      }
+      return soma;
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Código mostrando o uso da superclasse/subclasse, herança 
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        Account acc = new Account(0052, "Maria", 2200.00 );
+        BusinessAccount bacc = new BusinessAccount(0001, "Stella Iluminação", 500.00, 100.00);
+        System.out.println("Dados da conta BACC");
+        System.out.println("Número: " + bacc.getNumero() + " Holder: "
+                + bacc.getHolder()
+                + " Balence: " + bacc.getBalence()
+                + " Loan limited: " + bacc.getLoanLimit());
+
+        //UPCASTING
+        // superclasse recebe subclasse
+        Account acc1 = bacc;
+        Account acc2 = new BusinessAccount(1003, "Matheus", 20.50, 500.000);
+
+        //DONWCASTING
+
+        BusinessAccount acc3 = (BusinessAccount) acc2;
+        acc3.loan(100.00);
+
+
+        System.out.println("Dados da conta ACC");
+        System.out.println("Número: " + acc.getNumero() + " Holder: " + acc.getHolder() + " j'777Balence: " + acc.getBalence());
+        acc.withDraw(20.00);
+        System.out.println("-------------------------------------------");
+        System.out.println("UPTADE! Saque de 20 realizado. Amount: " + acc.getBalence());
+
+
+        sc.close();
+
+
+    }
+}
+
+public class Account {
+  private Integer numero;
+  private String holder;
+  protected Double balence;
+
+  public Account(){
+  }
+
+  public Account(Integer numero, String holder, Double balence) {
+        this.numero = numero;
+        this.holder = holder;
+        this.balence = balence;
+  }
+
+  public Integer getNumero() {
+        return numero;
+  }
+
+   public void setNumero(Integer numero) {
+        this.numero = numero;
+  }
+
+  public String getHolder() {
+        return holder;
+  }
+
+  public void setHolder(String holder) {
+        this.holder = holder;
+  }
+
+  public Double getBalence() {
+        return balence;
+  }
+
+  public void deposit(Double amount){
+        balence = balence+amount;
+  }
+
+    public void withDraw( Double amount){
+        balence = balence - amount;
+    }
+
+
+}
+
+
+public class BusinessAccount extends Account{
+
+    private Double loanLimit;
+
+    public BusinessAccount(){
+        super();
+    }
+
+    public BusinessAccount(Double loanLimit) {
+        this.loanLimit = loanLimit;
+    }
+
+    public BusinessAccount(Integer numero, String holder, Double balence, Double loanLimit) {
+        super(numero, holder, balence);
+        this.loanLimit = loanLimit;
+    }
+
+    public Double getLoanLimit() {
+        return loanLimit;
+    }
+
+    public void setLoanLimit(Double loanLimit) {
+        this.loanLimit = loanLimit;
+    }
+
+    public void loan(double amount) {
+
+        if (amount <= loanLimit) {
+            balence += amount - 10;
+        }
+    }
+}
+
+
+public class SavingAccount extends Account{
+
+    private Double interestRate;
+
+    public SavingAccount() {
+        super();
+    }
+
+    public SavingAccount(Integer numero, String holder, Double balence, Double interestRate) {
+        super(numero, holder, balence);
+        this.interestRate = interestRate;
+    }
+
+    public Double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(Double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public void updateBalence(){
+
+        balence = balence * interestRate;
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Fazer um programa que crie uma lista com a quantidade de funcionarios, aloque em uma lista. Em seguida entre com os dados e mostre o resultado dependendo se o funcionario for 3° ou não. Uso de @override e herança e polimorfismo. 
+
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Quantos funcionarios?");
+        int n = sc.nextInt();
+
+        List<Employee> list = new ArrayList<>();
+    for(int i = 0; i<n;i++){
+        System.out.println("O funcionario é terceirizado? (y/n) ");
+        char resposta = sc.next().charAt(0);
+
+        sc.nextLine();
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Hora: ");
+        int hora = sc.nextInt();
+
+        System.out.print("Valor por hora: ");
+        double valorPorHora = sc.nextDouble();
+
+        if(resposta == 'y'){
+            System.out.print("digite: ");
+            double additionalCharge = sc.nextDouble();
+            OutSourceEmployee terceirizado = new OutSourceEmployee(nome, hora, valorPorHora, additionalCharge);
+            list.add(terceirizado);
+        }
+
+        else{
+            Employee employee = new Employee(nome, hora, valorPorHora);
+            list.add(employee);
+        }
+
+    }
+
+    System.out.println("Pagamento: ");
+    for(Employee employee : list){
+        System.out.print(employee.getNome() + " - R$" + employee.payment() + "\n");
+    }
+
+        sc.close();
+
+
+    }
+}
+
+
+public class Employee {
+
+  private String nome;
+  private Integer hora;
+  private Double valorPorHora;
+
+  public Employee(){
+  }
+
+  public Employee(String nome, Integer hora, Double valorPorHora) {
+      this.nome = nome;
+      this.hora = hora;
+      this.valorPorHora = valorPorHora;
+  }
+
+  public String getNome() {
+      return nome;
+  }
+
+  public void setNome(String nome) {
+      this.nome = nome;
+  }
+
+  public Integer getHora() {
+      return hora;
+  }
+
+  public void setHora(Integer hora) {
+      this.hora = hora;
+  }
+
+  public Double getValorPorHora() {
+      return valorPorHora;
+  }
+
+  public void setValorPorHora(Double valorPorHora) {
+      this.valorPorHora = valorPorHora;
+  }
+
+  public double payment(){
+      return  valorPorHora*hora;
+  }
+}
+
+
+
+public class Employee {
+
+  private String nome;
+  private Integer hora;
+  private Double valorPorHora;
+
+  public Employee(){
+  }
+
+  public Employee(String nome, Integer hora, Double valorPorHora) {
+      this.nome = nome;
+      this.hora = hora;
+      this.valorPorHora = valorPorHora;
+  }
+
+  public String getNome() {
+      return nome;
+  }
+
+  public void setNome(String nome) {
+      this.nome = nome;
+  }
+
+  public Integer getHora() {
+      return hora;
+  }
+
+  public void setHora(Integer hora) {
+      this.hora = hora;
+  }
+
+  public Double getValorPorHora() {
+      return valorPorHora;
+  }
+
+  public void setValorPorHora(Double valorPorHora) {
+      this.valorPorHora = valorPorHora;
+  }
+
+  public double payment(){
+      return  valorPorHora*hora;
+  }
+}
+
+
+
+public class Employee {
+
+  private String nome;
+  private Integer hora;
+  private Double valorPorHora;
+
+  public Employee(){
+  }
+
+  public Employee(String nome, Integer hora, Double valorPorHora) {
+      this.nome = nome;
+      this.hora = hora;
+      this.valorPorHora = valorPorHora;
+  }
+
+  public String getNome() {
+      return nome;
+  }
+
+  public void setNome(String nome) {
+      this.nome = nome;
+  }
+
+  public Integer getHora() {
+      return hora;
+  }
+
+  public void setHora(Integer hora) {
+      this.hora = hora;
+  }
+
+  public Double getValorPorHora() {
+      return valorPorHora;
+  }
+
+  public void setValorPorHora(Double valorPorHora) {
+      this.valorPorHora = valorPorHora;
+  }
+
+  public double payment(){
+      return  valorPorHora*hora;
+  }
+}
+
+public class OutSourceEmployee extends Employee{
+
+    private Double additionalCharge;
+
+    public OutSourceEmployee(){
+        super();
+    }
+    public OutSourceEmployee(String nome, Integer hora, Double valorPorHora, Double additionalCharge) {
+        super(nome, hora, valorPorHora);
+        this.additionalCharge = additionalCharge;
+    }
+
+    public Double getAdditionalCharge() {
+        return additionalCharge;
+    }
+
+    public void setAdditionalCharge(Double additionalCharge) {
+        this.additionalCharge = additionalCharge;
+    }
+
+    @Override
+    public double payment(){
+        return  super.payment() + additionalCharge*1.1;
+    }
+
+}
 
 
 

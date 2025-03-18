@@ -1724,6 +1724,165 @@ public class OutSourceEmployee extends Employee{
 
 }
 
+----------------------------------------------------------------------------------------------------------------------
+Programa com polimorfismo e sobrecarga 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Quantos produtos?");
+        int n = sc.nextInt();
+
+        List<Product> list = new ArrayList<>();
+    for(int i = 0; i<n;i++){
+        System.out.println("Entre com os dados do produto " + (i+1) + " :");
+        System.out.println("O produto é comum, usado ou importado? ");
+        char resposta = sc.next().charAt(0);
+
+        sc.nextLine();
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Preço: ");
+        double preco = sc.nextDouble();
+
+        if(resposta == 'c') {
+            Product product = new Product(nome, preco);
+            list.add(product);
+        }
+
+        else if(resposta == 'i'){
+            System.out.print("Custom fee: ");
+            double customFee = sc.nextDouble();
+            ImportedProduct importedProduct = new ImportedProduct(nome, preco, customFee);
+            list.add(importedProduct);
+
+        }
+
+        else{
+            System.out.print("Entre com a data de fabricação: ");
+            LocalDate manufactureDate = LocalDate.parse(sc.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            UsedProduct usedProduct = new UsedProduct(nome, preco, manufactureDate);
+            list.add(usedProduct);
+        }
+
+    }
+
+    System.out.println("PRICE TAGS: ");
+    for(Product x : list){
+        System.out.print(x.priceTag() + "\n");
+    }
+
+        sc.close();
+
+
+    }
+}
+
+
+public class Product {
+
+  private String nome;
+  private Double preco;
+
+  public Product(){
+  }
+
+  public Product(String nome, Double preco) {
+    this.nome = nome;
+    this.preco = preco;
+  }
+
+  public String getNome() {
+    return nome;
+  }
+
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  public Double getPreco() {
+    return preco;
+  }
+
+  public void setPreco(Double preco) {
+    this.preco = preco;
+  }
+
+  public String priceTag(){
+      return "produto: " + nome + " Preço: " + preco;
+  }
+}
+
+
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
+public class UsedProduct extends Product{
+
+    private LocalDate manufactureDate;
+
+    public UsedProduct() {
+    }
+
+    public UsedProduct(String nome, Double preco, LocalDate manufactureDate) {
+        super(nome, preco);
+        this.manufactureDate = manufactureDate;
+    }
+
+    public LocalDate getManufactureDate() {
+        return manufactureDate;
+    }
+
+    public void setManufactureDate(LocalDate manufactureDate) {
+        this.manufactureDate = manufactureDate;
+    }
+
+    @Override
+    public String priceTag() {
+        return super.priceTag() + " (Data de fabricação: " + manufactureDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
+    }
+
+}
+
+public class ImportedProduct extends Product {
+
+    private Double customFee;
+
+    public ImportedProduct() {
+    }
+
+    public ImportedProduct(String nome, Double preco, Double customFee) {
+        super(nome, preco);
+        this.customFee = customFee;
+    }
+
+    public Double getCustomFee() {
+        return customFee;
+    }
+
+    public void setCustomFee(Double customFee) {
+        this.customFee = customFee;
+    }
+
+    @Override
+    public String priceTag() {
+        return super.priceTag() + " " + customFee;
+    }
+}
+
+
 
 
 

@@ -1882,7 +1882,133 @@ public class ImportedProduct extends Product {
     }
 }
 
+---------------------------------------------------------------------------------------------------------------------------------------usando polimorfismo e enum
+import java.util.List;
+import java.util.Scanner;
+import java.util.ArrayList;
 
+public class Main {
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Quantos formas? ");
+        int n = sc.nextInt();
+
+        List<Shape> list = new ArrayList<>();
+
+    for(int i = 0; i<n;i++) {
+        System.out.println("Entre com os dados do produto " + (i + 1) + ":");
+        System.out.print("Ratangulo ou circulo (r/c)? ");
+        char resposta = sc.next().charAt(0);
+
+        System.out.print("Preto, azul ou vermelho? ");
+        Color color = Color.valueOf(sc.next().toUpperCase());
+
+        if (resposta == 'r') {
+            System.out.print("Entre com a comprimento: ");
+            double width = sc.nextDouble();
+
+            System.out.print("Entre com a altura: ");
+            double height = sc.nextDouble();
+
+            MyRectangle rectangle = new MyRectangle(color, width, height);
+            list.add(rectangle);
+        } else {
+            System.out.print("Digite o raio: ");
+            double raio = sc.nextDouble();
+            Circle circle = new Circle(color, raio);
+            list.add(circle);
+
+        }
+    }
+
+    System.out.println("Infomações das formas: ");
+    for(Shape shape : list){
+        System.out.print("Cor: " + shape.getColor() + ", Area " + String.format("%.2f", shape.area()));
+    }
+
+    sc.close();
+
+
+    }
+}
+public abstract class Shape {
+
+  private Color color;
+
+  public Shape(){
+  }
+
+  public Shape(Color color) {
+    this.color = color;
+  }
+
+  public Color getColor() {
+    return color;
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
+  }
+
+  public abstract double area();
+}
+
+
+
+public class MyRectangle extends Shape {
+
+    private double width;
+    private double height;
+
+    public MyRectangle(Color color, double width, double height) {
+        super(color);
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width*height;
+    }
+}
+public class Circle extends Shape{
+
+    private double radious;
+
+    public Circle() {
+        super();
+    }
+
+    public Circle(double radious) {
+        this.radious = radious;
+    }
+
+    public Circle(Color color, double radious) {
+        super(color);
+        this.radious = radious;
+    }
+
+    public double getRadious() {
+        return radious;
+    }
+
+    public void setRadious(double radious) {
+        this.radious = radious;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI*radious*radious;
+    }
+}
+
+public enum Color {
+    PRETO,
+    AZUL,
+    VERMELHO
+}
+-------------------------------------------------------------------------------------------------------------------------------------
 
 
 

@@ -2011,6 +2011,24 @@ public enum Color {
 -------------------------------------------------------------------------------------------------------------------------------------
 
 
+recursividade - codigo basico 
+
+public class MetodoRecursivo {
+    public static double metodo(double a, double b) {
+        if (b <= 1) {
+            return a;
+        } else {
+            return metodo(b, a / b);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("metodo(5, 3) = " + metodo(5, 3));
+        System.out.println("metodo(15, 3) = " + metodo(15, 3));
+        System.out.println("metodo(28, -45) = " + metodo(28, -45));
+    }
+}
+
 
 
 

@@ -2028,11 +2028,66 @@ public class MetodoRecursivo {
         System.out.println("metodo(28, -45) = " + metodo(28, -45));
     }
 }
+--------------------------------------------------------------------------------------------------------------
+Lendo arquivos 
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args){
+
+        File file = new File("src/in.txt");
+        Scanner sc = null;
+
+        try {
+            sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                System.out.println(sc.nextLine());
+            }
+        }
+        catch(IOException e){
+            System.out.println("Erro: " + e.getMessage());
+        }
+        finally{
+            if(sc != null){
+                sc.close();
+            }
+        }
+
+    }
+}
 
 
+----------------------------------------------------------------------------------------------------------------
+podemoS ler o arquIvo aSSim tbm:
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
+public class Main {
+    public static void main(String[] args){
 
+        String path = "src/in.txt";
+    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line = br.readLine();
+
+            while (line != null) {
+                System.out.println(line);
+                line = br.readLine();
+            }
+        }
+        catch(IOException e){
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+        }
+
+    }
 
 
